@@ -332,6 +332,10 @@ function toggleSound(){
   document.getElementById('soundBtn').textContent = soundOn ? '🔊' : '🔇';
   if(soundOn){ music.volume=0.25; music.play().catch(()=>{}); } else music.pause();
 }
+document.addEventListener('scroll', function startMusic(){
+  if(!soundOn){ soundOn=true; music.volume=0.25; music.play().catch(()=>{}); document.getElementById('soundBtn').textContent='🔊'; }
+  document.removeEventListener('scroll', startMusic);
+}, {once:true});
 
 function toggleOther(cb){
   document.getElementById('otherWrap').classList.toggle('visible', cb.checked);
